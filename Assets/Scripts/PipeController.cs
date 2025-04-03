@@ -27,6 +27,9 @@ public class PipeController : MonoBehaviour
 
     void Update()
     {
+        if (GameState.gameOver)
+            return;
+
         transform.position += Vector3.left * scrollSpeed * Time.deltaTime;
 
         if (transform.position.x < backgroundPosition - pipeWidth)
