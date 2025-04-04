@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class PipeSpawner : MonoBehaviour
 {
-    public GameObject pipePrefab;
-    public float spawnRate = 2f;
-    public float minHeight = -0.6f;
-    public float maxHeight = 0.6f;
-    public float spawnX = 5f;
+    [SerializeField] private GameObject pipePrefab;
+    [SerializeField] private float spawnRate = 2f;
+    [SerializeField] private float minHeight = -0.6f;
+    [SerializeField] private float maxHeight = 0.6f;
+    [SerializeField] private float spawnX = 5f;
 
     void Start()
     {

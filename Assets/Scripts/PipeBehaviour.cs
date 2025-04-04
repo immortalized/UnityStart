@@ -3,7 +3,7 @@ using UnityEngine;
 public class PipeBehaviour : MonoBehaviour
 {
     private float pipeWidth;
-    public float scrollSpeed = 1f;
+    [SerializeField] private float scrollSpeed = 1f;
 
     void Start()
     {

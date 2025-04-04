@@ -2,12 +2,12 @@ using UnityEngine;
 
 public class ScrollGround : MonoBehaviour
 {
-    public float scrollSpeed = 1f;
+    [SerializeField] private float scrollSpeed = 1f;
     private float startScrollSpeed;
-    private float groundWidth;
+    [SerializeField] private float groundWidth;
     
-    public Transform background;
-    public bool isSecondGround = false;
+    [SerializeField] private Transform background;
+    [SerializeField] private bool isSecondGround = false;
 
     void Start()
     {

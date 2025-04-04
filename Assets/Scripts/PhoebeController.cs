@@ -3,19 +3,26 @@ using UnityEngine.InputSystem;
 
 public class PhoebeController : MonoBehaviour
 {
-    public float jumpForce = 1.2f;
+
+    [SerializeField] private PlayButtonBehaviour playButton;
+    [SerializeField] private float jumpForce = 1.2f;
     private float fastAnimationTimer;
-    public float animationSpeed = 1f;
-    public float fastAnimationDuration = 0.3f;
-    public float fastAnimationSpeed = 3f;
+    [SerializeField] private float animationSpeed = 1f;
+    [SerializeField] private float fastAnimationDuration = 0.3f;
+    [SerializeField] private float fastAnimationSpeed = 3f;
     private Rigidbody2D rb;
     private float defaultGravity;
+    private float defaultAnimSpeed;
+    
+    
     private Animator anim;
 
     void Start(){
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         defaultGravity = rb.gravityScale;
+        defaultAnimSpeed = anim.speed;
+        anim.speed = 0f;
     }
 
     void Update(){
@@ -49,15 +56,17 @@ public class PhoebeController : MonoBehaviour
     private void GameOver()
     {
         GameState.gameOver = true;
-        rb.gravityScale = 0f;
-        rb.linearVelocity = Vector2.zero;
+        rb.bodyType = RigidbodyType2D.Static;
         anim.speed = 0f;
+        playButton.ShowMenu();
     }
 
-    private void Revive()
+    public void Revive()
     {
         GameState.gameOver = false;
+        rb.bodyType = RigidbodyType2D.Dynamic;
         rb.gravityScale = defaultGravity;
+        anim.speed = defaultAnimSpeed;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
