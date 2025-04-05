@@ -29,7 +29,7 @@ public class PhoebeController : MonoBehaviour
         if (GameState.gameOver)
             return;
 
-        if (Mouse.current.leftButton.wasPressedThisFrame)
+        if (Input.GetMouseButtonDown(0) || (Input.touchCount > 0 && Input.GetTouch(0).phase == UnityEngine.TouchPhase.Began))
         {
             rb.linearVelocity = Vector2.up * jumpForce;
             fastAnimationTimer = fastAnimationDuration;
@@ -48,9 +48,7 @@ public class PhoebeController : MonoBehaviour
 
     void FixedUpdate()
     {
-        float tiltAngle = rb.linearVelocity.y * 10;
-        tiltAngle = Mathf.Clamp(tiltAngle, -20, 20);
-        transform.rotation = Quaternion.Euler(0, 0, tiltAngle);
+        transform.rotation = Quaternion.Euler(0, 0, Mathf.Clamp(rb.linearVelocity.y * 10, -20, 20));
     }
 
     private void GameOver()
@@ -64,6 +62,7 @@ public class PhoebeController : MonoBehaviour
     public void Revive()
     {
         GameState.gameOver = false;
+        GameState.score = 0;
         rb.bodyType = RigidbodyType2D.Dynamic;
         rb.gravityScale = defaultGravity;
         anim.speed = defaultAnimSpeed;
