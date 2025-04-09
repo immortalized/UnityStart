@@ -18,6 +18,7 @@ public class GameController : MonoBehaviour
 
     void Awake()
     {
+        Application.targetFrameRate = 60;
         if(Instance == null)
         {
             Instance = this;
@@ -32,7 +33,8 @@ public class GameController : MonoBehaviour
     public void RestartGame()
     {
         gameOver = false;
-        score = 9;
+        score = 0;
+        scoreDisplay.ClearRenderers();
         scoreDisplay.UpdateScore(0);
         menu.SetActive(false);
 

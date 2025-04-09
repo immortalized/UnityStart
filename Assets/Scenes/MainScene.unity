@@ -160,7 +160,7 @@ MonoBehaviour:
   - {fileID: 86512618, guid: 36d6d81a18967bf42909a0140bdd0cd6, type: 3}
   - {fileID: -654533483, guid: 36d6d81a18967bf42909a0140bdd0cd6, type: 3}
   digitPrefab: {fileID: 7189759404292280316, guid: 15de9ed40e7c34c23bdd7088aa6069f3, type: 3}
-  startPosition: {x: 0.665, y: 1.196}
+  startPosition: {x: 0.52, y: 1.125}
   digitOffset: 0.06
   digitScale: 0.6
 --- !u!4 &490829981

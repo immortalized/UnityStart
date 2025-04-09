@@ -24,14 +24,19 @@ public class ScoreDisplay : MonoBehaviour
             offset += digitOffset;
         }
 
-        for (int i = 0; i < scoreStr.Length; i++)
+        for (int i = scoreStr.Length - 1; i >= 0; i--)
         {
-            renderers[i].GetComponent<SpriteRenderer>().sprite = digitSprites[scoreStr[i] - '0'];
+            renderers[i].GetComponent<SpriteRenderer>().sprite = digitSprites[scoreStr[scoreStr.Length - i - 1] - '0'];
         }
+    }
 
-        for (int i = scoreStr.Length; i < renderers.Count; i++)
+    public void ClearRenderers()
+    {
+        renderers.Clear();
+        foreach (GameObject digit in GameObject.FindGameObjectsWithTag("Digit"))
         {
-            renderers[i].SetActive(false);
+            Destroy(digit);
         }
+        offset = 0f;
     }
 }

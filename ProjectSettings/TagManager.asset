@@ -8,6 +8,7 @@ TagManager:
   - Ground
   - Phoebe
   - ScoreTrigger
+  - Digit
   layers:
   - Default
   - TransparentFX
