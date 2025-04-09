@@ -3,7 +3,6 @@ using UnityEngine.InputSystem;
 
 public class PhoebeController : MonoBehaviour
 {
-
     [SerializeField] private PlayButtonBehaviour playButton;
     [SerializeField] private float jumpForce = 1.2f;
     private float fastAnimationTimer;
@@ -26,7 +25,7 @@ public class PhoebeController : MonoBehaviour
     }
 
     void Update(){
-        if (GameState.gameOver)
+        if (GameController.Instance.gameOver)
             return;
 
         if (Input.GetMouseButtonDown(0) || (Input.touchCount > 0 && Input.GetTouch(0).phase == UnityEngine.TouchPhase.Began))
@@ -51,18 +50,14 @@ public class PhoebeController : MonoBehaviour
         transform.rotation = Quaternion.Euler(0, 0, Mathf.Clamp(rb.linearVelocity.y * 10, -20, 20));
     }
 
-    private void GameOver()
+    public void Die()
     {
-        GameState.gameOver = true;
         rb.bodyType = RigidbodyType2D.Static;
         anim.speed = 0f;
-        playButton.ShowMenu();
     }
 
     public void Revive()
     {
-        GameState.gameOver = false;
-        GameState.score = 0;
         rb.bodyType = RigidbodyType2D.Dynamic;
         rb.gravityScale = defaultGravity;
         anim.speed = defaultAnimSpeed;
@@ -70,6 +65,14 @@ public class PhoebeController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        GameOver();
+        GameController.Instance.GameOver();
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("ScoreTrigger"))
+        {
+            GameController.Instance.AddScore(1);
+        }
     }
 }

@@ -2,19 +2,18 @@ using UnityEngine;
 
 public class PipeBehaviour : MonoBehaviour
 {
-    private float pipeWidth;
     [SerializeField] private float scrollSpeed = 1f;
-
-    void Start()
-    {
-        pipeWidth = transform.GetChild(0).GetComponent<SpriteRenderer>().bounds.size.x;
-    }
 
     void Update()
     {
-        if (GameState.gameOver)
+        if (GameController.Instance.gameOver)
             return;
 
         transform.position += Vector3.left * scrollSpeed * Time.deltaTime;
+
+        if (transform.position.x < -1)
+        {
+            Destroy(gameObject);
+        }
     }
 }

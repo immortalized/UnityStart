@@ -29,7 +29,7 @@ public class ScrollGround : MonoBehaviour
 
     void Update()
     {
-        if (GameState.gameOver)
+        if (GameController.Instance.gameOver)
             return;
 
         transform.position += Vector3.left * scrollSpeed * Time.deltaTime;

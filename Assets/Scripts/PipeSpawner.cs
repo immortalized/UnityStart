@@ -11,15 +11,25 @@ public class PipeSpawner : MonoBehaviour
     void Start()
     {
         InvokeRepeating(nameof(SpawnPipe), 0f, spawnRate);
+        StopSpawning();
     }
 
     void SpawnPipe()
     {
-        if(GameState.gameOver)
-            return;
+        Vector3 spawnPos = new Vector3(spawnX, Random.Range(minHeight, maxHeight), 0);
+        Instantiate(pipePrefab, spawnPos, Quaternion.identity);
+    }
 
-        float randomY = Random.Range(minHeight, maxHeight);
-        Vector3 spawnPosition = new Vector3(spawnX, randomY, 0);
-        Instantiate(pipePrefab, spawnPosition, Quaternion.identity);
+    public void StopSpawning()
+    {
+        CancelInvoke(nameof(SpawnPipe));
+    }
+
+    public void RestartSpawning()
+    {
+        if (!IsInvoking(nameof(SpawnPipe)))
+        {
+            InvokeRepeating(nameof(SpawnPipe), 0f, spawnRate);
+        }
     }
 }
