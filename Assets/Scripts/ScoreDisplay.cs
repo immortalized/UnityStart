@@ -10,6 +10,7 @@ public class ScoreDisplay : MonoBehaviour
     [SerializeField] private Vector2 startPosition = new(1f, -1f);
     [SerializeField] private float digitOffset = 0.1f;
     [SerializeField] private float digitScale = 0.6f;
+    [SerializeField] private bool center = false;
 
     public void UpdateScore(int score)
     {
@@ -27,6 +28,16 @@ public class ScoreDisplay : MonoBehaviour
         for (int i = scoreStr.Length - 1; i >= 0; i--)
         {
             renderers[i].GetComponent<SpriteRenderer>().sprite = digitSprites[scoreStr[scoreStr.Length - i - 1] - '0'];
+        }
+
+        if (center)
+        {
+            for (int i = scoreStr.Length - 1; i >= 0; i--)
+            {
+                float width = renderers[i].GetComponent<SpriteRenderer>().bounds.size.x;
+                var t = renderers[i].transform;
+                t.position = new Vector3(t.position.x + width / 2f + digitOffset / 2, t.position.y, t.position.z);
+            }
         }
     }
 

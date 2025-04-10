@@ -805,6 +805,28 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: BEST
+      rect:
+        serializedVersion: 2
+        x: 356
+        y: 334
+        width: 55
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 91b4d570014454a24b353da2f9acfaea
+      internalID: -394154562
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
@@ -820,6 +842,7 @@ TextureImporter:
       entries: []
     nameFileIdTable:
       BACKGROUND: 1630002584
+      BEST: -394154562
       EIGHT: 86512618
       FIVE: 1848889784
       FLAP_01: -6849601262952108319

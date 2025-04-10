@@ -14,6 +14,7 @@ public class GameController : MonoBehaviour
     [SerializeField] private Sprite gameOverSprite;
     [SerializeField] private GameObject menu;
     [SerializeField] private ScoreDisplay scoreDisplay;
+    [SerializeField] private ScoreDisplay bestScoreDisplay;
     [SerializeField] private Vector3 phoebeStartPosition;
 
     void Awake()
@@ -36,6 +37,7 @@ public class GameController : MonoBehaviour
         score = 0;
         scoreDisplay.ClearRenderers();
         scoreDisplay.UpdateScore(0);
+        bestScoreDisplay.UpdateScore(111);
         menu.SetActive(false);
 
         if (firstPlayPress)
