@@ -806,13 +806,35 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BEST
+      name: MEDAL_DISPLAY
       rect:
         serializedVersion: 2
-        x: 356
-        y: 334
-        width: 55
-        height: 18
+        x: 3
+        y: 196
+        width: 113
+        height: 57
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1f637b010da8f154c9f98dec1be70099
+      internalID: 1839020704
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MEDAL_GOLD
+      rect:
+        serializedVersion: 2
+        x: 121
+        y: 208
+        width: 22
+        height: 22
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -821,8 +843,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 91b4d570014454a24b353da2f9acfaea
-      internalID: -394154562
+      spriteID: 98d654cccb5ff97489a413d9f07d6ae3
+      internalID: -702258746
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MEDAL_SILVER
+      rect:
+        serializedVersion: 2
+        x: 121
+        y: 232
+        width: 22
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 95e3283f2c15cc44b9ef643b6631a964
+      internalID: 1483849830
       vertices: []
       indices: 
       edges: []
@@ -852,6 +896,9 @@ TextureImporter:
       FlappyBird SpriteSheet_3: 532340134
       GAME_OVER: 5955124824224392516
       GROUND: 7294014354058790825
+      MEDAL_DISPLAY: 1839020704
+      MEDAL_GOLD: -702258746
+      MEDAL_SILVER: 1483849830
       Mobile - Flappy Bird - Version 12 Sprites_0: 5003628964238269105
       Mobile - Flappy Bird - Version 12 Sprites_1: -221491057933239876
       Mobile - Flappy Bird - Version 12 Sprites_10: 5521694834215240920

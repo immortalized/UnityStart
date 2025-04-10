@@ -11,9 +11,12 @@ public class ScoreDisplay : MonoBehaviour
     [SerializeField] private float digitOffset = 0.1f;
     [SerializeField] private float digitScale = 0.6f;
     [SerializeField] private bool center = false;
+    [SerializeField] private Transform digitsParent = null;
+    [SerializeField] private int sortingOrder = 0;
 
     public void UpdateScore(int score)
     {
+        ClearRenderers();
         string scoreStr = score.ToString();
 
         while(renderers.Count < scoreStr.Length)
@@ -21,6 +24,18 @@ public class ScoreDisplay : MonoBehaviour
             GameObject digitObject = Instantiate(digitPrefab);
             digitObject.transform.position = new Vector3(startPosition.x - offset, startPosition.y, 0);
             digitObject.transform.localScale = new Vector3(digitScale, digitScale, digitScale);
+
+            if (digitsParent != null)
+            {
+                digitObject.transform.SetParent(digitsParent);
+            }
+
+            SpriteRenderer spriteRenderer = digitObject.GetComponent<SpriteRenderer>();
+            if (spriteRenderer != null)
+            {
+                spriteRenderer.sortingOrder = sortingOrder;
+            }
+
             renderers.Add(digitObject);
             offset += digitOffset;
         }
@@ -41,7 +56,7 @@ public class ScoreDisplay : MonoBehaviour
         }
     }
 
-    public void ClearRenderers()
+    private void ClearRenderers()
     {
         renderers.Clear();
         foreach (GameObject digit in GameObject.FindGameObjectsWithTag("Digit"))
