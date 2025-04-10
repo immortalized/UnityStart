@@ -75,12 +75,12 @@ public class GameController : MonoBehaviour
 
     public void GameOver()
     {
-        if (score >= 50)
-        {
-            medalDisplay.sprite = medals[0];
-        } else if(score >= 100)
+        if (score >= 100)
         {
             medalDisplay.sprite = medals[1];
+        } else if(score >= 50)
+        {
+            medalDisplay.sprite = medals[0];
         }
         gameOver = true;
         pipeSpawner.StopSpawning();
