@@ -43,10 +43,7 @@ public class PhoebeController : MonoBehaviour
         {
             anim.speed = animationSpeed;
         }
-    }
 
-    void FixedUpdate()
-    {
         transform.rotation = Quaternion.Euler(0, 0, Mathf.Clamp(rb.linearVelocity.y * 10, -20, 20));
     }
 
