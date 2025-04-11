@@ -3,28 +3,14 @@ using UnityEngine;
 public class ScrollGround : MonoBehaviour
 {
     [SerializeField] private float scrollSpeed = 1f;
-    private float startScrollSpeed;
-    [SerializeField] private float groundWidth;
-    
-    [SerializeField] private Transform background;
-    [SerializeField] private bool isSecondGround = false;
+    private Vector2 startPos;
+    private float groundWidth;
 
     void Start()
     {
         SpriteRenderer groundRenderer = GetComponent<SpriteRenderer>();
         groundWidth = groundRenderer.bounds.size.x;
-        startScrollSpeed = scrollSpeed;
-        
-        if (background != null)
-        {
-            float backgroundWidth = background.GetComponent<SpriteRenderer>().bounds.size.x;
-            transform.localScale = new Vector3(backgroundWidth / groundWidth, 1, 1);
-            groundWidth = backgroundWidth;
-
-            if(isSecondGround){
-                transform.position = new Vector3(backgroundWidth, transform.position.y, transform.position.z);
-            }
-        }
+        startPos = new Vector2(transform.position.x, transform.position.y);
     }
 
     void Update()
@@ -34,9 +20,9 @@ public class ScrollGround : MonoBehaviour
 
         transform.position += Vector3.left * scrollSpeed * Time.deltaTime;
 
-        if (transform.position.x < -groundWidth)
+        if (transform.position.x < 0)
         {
-            transform.position += new Vector3(groundWidth * 2, 0, 0);
+            transform.position = new Vector3(startPos.x, startPos.y, 0);
         }
     }
 }

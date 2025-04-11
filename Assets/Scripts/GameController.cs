@@ -28,6 +28,8 @@ public class GameController : MonoBehaviour
     {
         Application.targetFrameRate = 60;
         bestScore = PlayerPrefs.GetInt("best_score", 0);
+        medalBestScoreDisplay.UpdateScore(bestScore);
+        UpdateMedal();
         if(Instance == null)
         {
             Instance = this;
@@ -51,7 +53,6 @@ public class GameController : MonoBehaviour
         score = 0;
         scoreDisplay.UpdateScore(0);
         menu.SetActive(false);
-        medalDisplay.sprite = null;
 
         if (firstPlayPress)
         {
@@ -75,18 +76,16 @@ public class GameController : MonoBehaviour
 
     public void GameOver()
     {
-        if (score >= 100)
-        {
-            medalDisplay.sprite = medals[1];
-        } else if(score >= 50)
-        {
-            medalDisplay.sprite = medals[0];
-        }
         gameOver = true;
         pipeSpawner.StopSpawning();
         phoebe.Die();
         medalScoreDisplay.UpdateScore(score);
-        medalBestScoreDisplay.UpdateScore(bestScore);
+        if(score > bestScore)
+        {
+            bestScore = score;
+            medalBestScoreDisplay.UpdateScore(bestScore);
+            UpdateMedal();
+        }
         menu.SetActive(true);
     }
 
@@ -94,10 +93,16 @@ public class GameController : MonoBehaviour
     {
         score += n;
         scoreDisplay.UpdateScore(score);
+    }
 
-        if(score > bestScore)
+    private void UpdateMedal()
+    {
+        if (bestScore >= 100)
         {
-            bestScore = score;
+            medalDisplay.sprite = medals[1];
+        } else if(bestScore >= 50)
+        {
+            medalDisplay.sprite = medals[0];
         }
     }
     

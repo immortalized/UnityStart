@@ -58,11 +58,11 @@ public class ScoreDisplay : MonoBehaviour
 
     private void ClearRenderers()
     {
-        renderers.Clear();
-        foreach (GameObject digit in GameObject.FindGameObjectsWithTag("Digit"))
+        foreach (GameObject digit in renderers)
         {
             Destroy(digit);
         }
+        renderers.Clear();
         offset = 0f;
     }
 }
