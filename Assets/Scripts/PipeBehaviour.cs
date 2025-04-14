@@ -6,7 +6,7 @@ public class PipeBehaviour : MonoBehaviour
 
     void Update()
     {
-        if (GameController.Instance.gameOver)
+        if (GameController.Instance.gameOver || GameController.Instance.stopScrolling)
             return;
 
         transform.position += Vector3.left * scrollSpeed * Time.deltaTime;

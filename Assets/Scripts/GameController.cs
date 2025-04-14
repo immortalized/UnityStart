@@ -7,6 +7,7 @@ public class GameController : MonoBehaviour
 {
     public static GameController Instance;
     public bool gameOver = true;
+    public bool stopScrolling = false;
     public int score = 0;
     public int bestScore;
     private bool firstPlayPress = true;
@@ -49,6 +50,7 @@ public class GameController : MonoBehaviour
 
     public void RestartGame()
     {
+        stopScrolling = false;
         gameOver = false;
         score = 0;
         scoreDisplay.UpdateScore(0);
@@ -78,7 +80,6 @@ public class GameController : MonoBehaviour
     {
         gameOver = true;
         pipeSpawner.StopSpawning();
-        phoebe.Die();
         medalScoreDisplay.UpdateScore(score);
         if(score > bestScore)
         {

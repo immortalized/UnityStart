@@ -10,14 +10,22 @@ public class PhoebeController : MonoBehaviour
     [SerializeField] private float fastAnimationDuration = 0.3f;
     [SerializeField] private float fastAnimationSpeed = 3f;
     private Rigidbody2D rb;
+    private bool shouldStopMovement = false;
     private float defaultGravity;
     private float defaultAnimSpeed;
+    private float rotationSpeed;
+    private AudioSource audioSource;
+    [SerializeField] private AudioClip flapSound;
+    [SerializeField] private AudioClip scoreSound;
+    [SerializeField] private AudioClip hitSound;
+    [SerializeField] private AudioClip dieSound;
     
     
     private Animator anim;
 
     void Start(){
         rb = GetComponent<Rigidbody2D>();
+        audioSource = GetComponent<AudioSource>();
         anim = GetComponent<Animator>();
         defaultGravity = rb.gravityScale;
         defaultAnimSpeed = anim.speed;
@@ -25,7 +33,7 @@ public class PhoebeController : MonoBehaviour
     }
 
     void Update(){
-        if (GameController.Instance.gameOver)
+        if (GameController.Instance.gameOver || shouldStopMovement)
             return;
 
         if (Input.GetMouseButtonDown(0) || (Input.touchCount > 0 && Input.GetTouch(0).phase == UnityEngine.TouchPhase.Began))
@@ -33,6 +41,7 @@ public class PhoebeController : MonoBehaviour
             rb.linearVelocity = Vector2.up * jumpForce;
             fastAnimationTimer = fastAnimationDuration;
             anim.speed = fastAnimationSpeed;
+            audioSource.PlayOneShot(flapSound);
         }
 
         if(fastAnimationTimer > 0f)
@@ -43,8 +52,19 @@ public class PhoebeController : MonoBehaviour
         {
             anim.speed = animationSpeed;
         }
+    }
 
-        transform.rotation = Quaternion.Euler(0, 0, Mathf.Clamp(rb.linearVelocity.y * 10, -20, 20));
+    void FixedUpdate()
+    {
+        if(rb.linearVelocity.y > 0)
+        {
+            rotationSpeed = 10f;
+        } else
+        {
+            rotationSpeed = 20f;
+        }
+
+        transform.rotation = Quaternion.Euler(0, 0, Mathf.Clamp(rb.linearVelocity.y * rotationSpeed, -90, 10));
     }
 
     public void Die()
@@ -58,11 +78,16 @@ public class PhoebeController : MonoBehaviour
         rb.bodyType = RigidbodyType2D.Dynamic;
         rb.gravityScale = defaultGravity;
         anim.speed = defaultAnimSpeed;
+        shouldStopMovement = false;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        GameController.Instance.GameOver();
+        if(collision.gameObject.CompareTag("Ground"))
+        {
+            GameController.Instance.GameOver();
+            Die();
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -70,6 +95,17 @@ public class PhoebeController : MonoBehaviour
         if (collision.CompareTag("ScoreTrigger"))
         {
             GameController.Instance.AddScore(1);
+            audioSource.PlayOneShot(scoreSound);
+        }
+        if(collision.CompareTag("Pipe"))
+        {
+            if(!shouldStopMovement)
+            {
+                audioSource.PlayOneShot(hitSound);
+                audioSource.PlayOneShot(dieSound);
+            }
+            shouldStopMovement = true;
+            GameController.Instance.stopScrolling = true;
         }
     }
 }
