@@ -101,7 +101,7 @@ public class PhoebeController : MonoBehaviour
             GameController.Instance.AddScore(1);
             audioSource.PlayOneShot(scoreSound);
         }
-        if(collision.CompareTag("Pipe"))
+        if(collision.CompareTag("Pipe") || collision.CompareTag("Barrier"))
         {
             if(!shouldStopMovement)
             {
