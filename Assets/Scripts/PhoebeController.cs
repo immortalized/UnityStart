@@ -85,6 +85,10 @@ public class PhoebeController : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Ground"))
         {
+            if(!shouldStopMovement)
+            {
+                audioSource.PlayOneShot(hitSound);
+            }
             GameController.Instance.GameOver();
             Die();
         }

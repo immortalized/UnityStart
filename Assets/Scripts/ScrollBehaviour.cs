@@ -1,15 +1,13 @@
 using UnityEngine;
 
-public class ScrollGround : MonoBehaviour
+public class ScrollBehaviour : MonoBehaviour
 {
-    [SerializeField] private float scrollSpeed = 1f;
+    [SerializeField] private float scrollSpeed = 0.85f;
     private Vector2 startPos;
-    private float groundWidth;
 
     void Start()
     {
         SpriteRenderer groundRenderer = GetComponent<SpriteRenderer>();
-        groundWidth = groundRenderer.bounds.size.x;
         startPos = new Vector2(transform.position.x, transform.position.y);
     }
 
@@ -20,7 +18,7 @@ public class ScrollGround : MonoBehaviour
 
         transform.position += Vector3.left * scrollSpeed * Time.deltaTime;
 
-        if (transform.position.x < 0)
+        if (transform.position.x < -0.72)
         {
             transform.position = new Vector3(startPos.x, startPos.y, 0);
         }

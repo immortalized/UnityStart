@@ -16,7 +16,6 @@ public class GameController : MonoBehaviour
     [SerializeField] private PipeSpawner pipeSpawner;
     [SerializeField] private SpriteRenderer titleSpriteRenderer;
     [SerializeField] private Sprite gameOverSprite;
-    [SerializeField] private GameObject menu;
     [SerializeField] private GameObject gameOverDisplay;
     [SerializeField] private ScoreDisplay scoreDisplay;
     [SerializeField] private ScoreDisplay medalScoreDisplay;
@@ -24,6 +23,7 @@ public class GameController : MonoBehaviour
     [SerializeField] private SpriteRenderer medalDisplay;
     [SerializeField] private List<Sprite> medals = new();
     [SerializeField] private Vector3 phoebeStartPosition;
+    [SerializeField] private List<VerticalFloatTransition> floatTransitions;
 
     void Awake()
     {
@@ -54,7 +54,6 @@ public class GameController : MonoBehaviour
         gameOver = false;
         score = 0;
         scoreDisplay.UpdateScore(0);
-        menu.SetActive(false);
 
         if (firstPlayPress)
         {
@@ -69,6 +68,15 @@ public class GameController : MonoBehaviour
             foreach (GameObject pipe in GameObject.FindGameObjectsWithTag("Pipe"))
             {
                 Destroy(pipe);
+            }
+        }
+
+        foreach (VerticalFloatTransition vft in floatTransitions)
+        {
+            if (vft != null)
+            {
+                vft.TranslateToOriginal();
+                vft.Hide();
             }
         }
 
@@ -87,7 +95,15 @@ public class GameController : MonoBehaviour
             medalBestScoreDisplay.UpdateScore(bestScore);
             UpdateMedal();
         }
-        menu.SetActive(true);
+
+        foreach (VerticalFloatTransition vft in floatTransitions)
+        {
+            if (vft != null)
+            {
+                vft.TranslateToOffset();
+                vft.Show();
+            }
+        }
     }
 
     public void AddScore(int n)
