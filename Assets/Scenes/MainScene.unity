@@ -845,6 +845,9 @@ MonoBehaviour:
   minHeight: -0.4
   maxHeight: 0.6
   spawnX: 1
+  movingChance: 0.3
+  verticalAmplitude: 0.13
+  verticalFrequency: 0.35
 --- !u!1 &1073144267
 GameObject:
   m_ObjectHideFlags: 0
